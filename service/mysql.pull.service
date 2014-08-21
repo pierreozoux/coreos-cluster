@@ -1,0 +1,5 @@
+[Unit]
+Description=mysql-pull
+
+[Service]
+ExecStart=/usr/bin/docker pull mysql

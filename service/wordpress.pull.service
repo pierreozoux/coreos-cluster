@@ -1,0 +1,8 @@
+[Unit]
+Description=wordpress-pull
+
+[Service]
+ExecStart=/usr/bin/docker pull wordpress
+
+[X-Fleet]
+X-ConditionMachineOf=mysql.pull.service

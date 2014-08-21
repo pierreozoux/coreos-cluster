@@ -1,0 +1,13 @@
+[Unit]
+Description=wordpress1
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill wordpress1
+ExecStartPre=-/usr/bin/docker rm wordpress1
+ExecStartPre=/usr/bin/docker pull wordpress
+ExecStart=/usr/bin/docker run --name wordpress1 --link mysql1:mysql -e MYSQL_ROOT_PASSWORD=mysecretpassword -d wordpress
+ExecStop=/usr/bin/docker kill wordpress1
+
+[X-Fleet]
+X-ConditionMachineOf=mysql.1.service
+X-ConditionMachineOf=wordpress.pull.service

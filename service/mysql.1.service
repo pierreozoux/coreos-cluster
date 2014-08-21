@@ -1,0 +1,11 @@
+[Unit]
+Description=mysql1
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill mysql1
+ExecStartPre=-/usr/bin/docker rm mysql1
+ExecStart=/usr/bin/docker run --name mysql1 -e MYSQL_ROOT_PASSWORD=mysecretpassword -d mysql
+ExecStop=/usr/bin/docker kill mysql1
+
+[X-Fleet]
+X-ConditionMachineOf=mysql.pull.service
